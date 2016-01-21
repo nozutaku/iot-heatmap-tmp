@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sample with leaflet</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+      <!-- ★★★★★ここからが読み込めない★★★★★★ -->
+       <link rel="stylesheet" src="https://heatmapnara.herokuapp.com/leaflet.css" />
+        
+        <script type="text/javascript" src="leaflet.js"></script>
+
+      <script type="text/javascript" src="leaflet-heat.js"></script>
+    
+    <!--  
+      <script type="text/javascript" src="https://heatmapnara.herokuapp.com/leaflet.js"></script>
+
+      <script type="text/javascript" src="https://heatmapnara.herokuapp.com/leaflet-heat.js"></script>
+    -->
+      <!-- ★★★★★ここまで読み込めない★★★★★★ -->
+
+
+
+<style>
+body{ padding: 0; margin: 0; }
+html, body, #map{ height: 100%; }
+</style>
+</head>
+<body>
+ 
+   <div id="map"></div>
+
+<!--
+<img src="takemaru_1_normal.png">
+-->
+
+<script>
+var LOG_OUTPUT = 1;
+    
+/* for test.
+var addressPoints = [
+[34.68000, 135.83050, 1 ],// lat, lng, intensity
+[34.68000, 135.83100, 1 ],
+[34.68050, 135.83000, 1 ],
+[34.68050, 135.83020, 1 ],
+[34.68050, 135.83040, 1 ],
+[34.68050, 135.83060, 1 ],
+[34.68050, 135.83080, 0.5 ],
+[34.68050, 135.83100, 1 ],
+[34.68020, 135.83000, 1 ],
+[34.68020, 135.82980, 1 ],
+[34.68020, 135.82960, 1 ],
+[34.68020, 135.82940, 1 ],
+[34.68020, 135.82920, 1 ]
+];
+*/
+    
+
+
+var addressPoints = new Array();
+    
+    var counter=0;
+<% for (var i = 0;i <  map_data.length ;i++){ %> 
+    addressPoints[counter] = new Array();
+    
+    addressPoints[counter][0] = <%= map_data[i][0] %>;
+    addressPoints[counter][1] = <%= map_data[i][1] %>;
+    addressPoints[counter][2] = <%= map_data[i][2] %>;
+    
+    counter++;
+<% } %>
+    
+    console.log("counter=" + counter);
+
+    if( LOG_OUTPUT == 1 ){
+        for(var l =0; l < counter; l++){
+            for(var n=0; n < 3; n++){
+                console.log("addressPoints[" + l + "]["
+                            + n + "]=" + addressPoints[l][n]);
+            }
+        }
+    }
+
+    
+/* =============================================================== */
+/* 地図の中心地を標準で設定。本番では現在地を動的取得する                   */
+/* =============================================================== */
+var DEF_LAT=34.681600; var DEF_LON=135.829000; var DEF_ZOOM=18;     //きらっと奈良位置
+
+    
+var map = L.map('map').setView([DEF_LAT, DEF_LON], DEF_ZOOM);
+
+var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="//osm.org/copyright">OpenStreetMap</a> contributors',}).addTo(map);
+addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+//var heat = L.heatLayer(addressPoints).addTo(map),
+//    draw = true;
+
+var heat = L.heatLayer(addressPoints).addTo(map);
+    draw = true;
+
+</script> 
+
+</body>
+</html>
