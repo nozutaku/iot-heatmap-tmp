@@ -28,23 +28,6 @@ var db_raw_data = new Array();  //DBからの生データ配列
 
 var db_checking=0;  // DBから応答返ってきているか否か。1=チェック中(応答待), 0=それ以外
 
-/*
-var mapdata = [
-[34.68000, 135.83050, 1 ],// lat, lng, intensity
-[34.68000, 135.83100, 1 ],
-[34.68050, 135.83000, 1 ],
-[34.68050, 135.83020, 1 ],
-[34.68050, 135.83040, 1 ],
-[34.68050, 135.83060, 1 ],
-[34.68050, 135.83080, 0.5 ],
-[34.68050, 135.83100, 1 ],
-[34.68020, 135.83000, 1 ],
-[34.68020, 135.82980, 1 ],
-[34.68020, 135.82960, 1 ],
-[34.68020, 135.82940, 1 ],
-[34.68020, 135.82920, 1 ]
-];
-*/
 
 
 /* ===================================
@@ -198,7 +181,7 @@ function getHotPointFromDB( interval, res ){
 	//設定要
 	var KINTONE_URL = "https://v2urc.cybozu.com/k/v1/records.json?app=17";
 	var httpRequestHeader1 = "X-Cybozu-API-Token";
-	var httpRequestHeader1_body = "4DRIq9OCEiwk8pqAkYN5WG5tmQ41QZ5Mak8FRBli";
+	var httpRequestHeader1_body = "";
 	var httpRequestHeader2 = "v2urc.cybozu.com";
 	var httpRequestHeader2_body = "443";
 
@@ -233,7 +216,7 @@ function getHotPointFromDB( interval, res ){
 	var options = {
 		url: query_string2,
 //        url: KINTONE_URL,
-		headers: {'X-Cybozu-API-Token': '4DRIq9OCEiwk8pqAkYN5WG5tmQ41QZ5Mak8FRBli'},
+		headers: {'X-Cybozu-API-Token': 'hidden. please ask nozu.'},
 		json: true
 	};
 
